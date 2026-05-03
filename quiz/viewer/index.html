@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Квизы</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>Квизы</h1>
+      <p class="tagline">Готовые тесты из папки <code>quiz/db</code>. Без регистрации, только чтение файлов с локального сервера.</p>
+    </header>
+
+    <main>
+      <section id="screen-list" class="screen active">
+        <h2 class="h2">Выберите квиз</h2>
+        <p id="list-error" class="error" hidden></p>
+        <ul id="quiz-list" class="quiz-list"></ul>
+      </section>
+
+      <section id="screen-play" class="screen" hidden>
+        <div class="play-bar">
+          <button type="button" id="btn-back" class="btn ghost">← К списку</button>
+          <span id="play-title" class="play-title"></span>
+          <span id="play-progress" class="muted"></span>
+        </div>
+        <div id="play-area" class="play-area"></div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Запуск из корня репозитория:
+      <code>python3 -m http.server 8765</code> →
+      <code>http://127.0.0.1:8765/quiz/viewer/</code>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

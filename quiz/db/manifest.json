@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "quizzes": [
+    {
+      "id": "peremennye-python",
+      "title": "Переменные и имена в Python",
+      "file": "peremennye-python.json",
+      "description": "Квиз по уроку 02: переменные, идентификаторы, присваивание, типы."
+    }
+  ]
+}

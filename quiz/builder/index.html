@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Конструктор квизов</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <h1>Конструктор квизов</h1>
+      <p class="tagline">
+        Локально в браузере. Экспорт JSON положите в <code>quiz/db/</code> и добавьте запись в
+        <code>manifest.json</code> — тогда квиз появится в <code>quiz/viewer/</code>.
+      </p>
+      <nav class="tabs" role="tablist">
+        <button type="button" class="tab active" data-tab="edit" role="tab" aria-selected="true">Редактор</button>
+        <button type="button" class="tab" data-tab="play" role="tab" aria-selected="false">Прохождение</button>
+        <button type="button" class="tab" data-tab="export" role="tab" aria-selected="false">Экспорт</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="panel-edit" class="panel active" aria-labelledby="edit-heading">
+        <h2 id="edit-heading" class="sr-only">Редактор</h2>
+        <div class="toolbar">
+          <button type="button" id="btn-add-question" class="btn primary">+ Вопрос</button>
+          <button type="button" id="btn-clear-all" class="btn danger ghost">Очистить всё</button>
+          <span class="toolbar-gap"></span>
+          <label class="btn ghost file-btn">
+            Импорт JSON
+            <input type="file" id="import-json" accept=".json,application/json" hidden />
+          </label>
+          <button type="button" id="btn-save-local" class="btn">Сохранить в браузер</button>
+        </div>
+        <p class="hint">Черновик в <code>localStorage</code>. Файлы БД — отдельно, в папке <code>quiz/db/</code>.</p>
+        <div id="questions-list" class="questions-list"></div>
+      </section>
+
+      <section id="panel-play" class="panel" hidden aria-labelledby="play-heading">
+        <h2 id="play-heading" class="sr-only">Прохождение</h2>
+        <div class="toolbar">
+          <button type="button" id="btn-play-start" class="btn primary">Начать заново</button>
+          <span id="play-progress" class="muted"></span>
+        </div>
+        <div id="play-area" class="play-area"></div>
+      </section>
+
+      <section id="panel-export" class="panel" hidden aria-labelledby="export-heading">
+        <h2 id="export-heading" class="sr-only">Экспорт</h2>
+        <div class="toolbar">
+          <button type="button" id="btn-export-md" class="btn primary">Скачать .md</button>
+          <button type="button" id="btn-export-json" class="btn">Скачать .json для quiz/db</button>
+        </div>
+        <label class="field">
+          <span>id квиза (латиница, для имени файла и manifest)</span>
+          <input type="text" id="export-id" placeholder="naprimer-peremennye" />
+        </label>
+        <label class="field">
+          <span>Заголовок (title)</span>
+          <input type="text" id="export-title" value="Квиз" />
+        </label>
+        <label class="field">
+          <span>Описание (description), опционально</span>
+          <input type="text" id="export-desc" placeholder="Кратко для списка в viewer" />
+        </label>
+        <label class="field">
+          <span>Превью Markdown</span>
+          <textarea id="export-preview" readonly rows="12"></textarea>
+        </label>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Сервер из корня репозитория:
+      <code>python3 -m http.server 8765</code> →
+      <code>http://127.0.0.1:8765/quiz/builder/</code>
+    </footer>
+
+    <template id="tpl-question">
+      <article class="q-card" data-qid="">
+        <div class="q-card-head">
+          <span class="q-num"></span>
+          <button type="button" class="btn icon danger remove-q" title="Удалить вопрос" aria-label="Удалить вопрос">×</button>
+        </div>
+        <label class="field">
+          <span>Текст вопроса</span>
+          <textarea class="q-text" rows="3" placeholder="Формулировка вопроса…"></textarea>
+        </label>
+        <fieldset class="options">
+          <legend>Варианты (отметьте один верный)</legend>
+          <div class="opt" data-i="0">
+            <label class="opt-correct"><input type="radio" class="q-correct" name="" value="0" /><span>a)</span></label>
+            <input type="text" class="q-opt" placeholder="Вариант a" />
+          </div>
+          <div class="opt" data-i="1">
+            <label class="opt-correct"><input type="radio" class="q-correct" name="" value="1" /><span>b)</span></label>
+            <input type="text" class="q-opt" placeholder="Вариант b" />
+          </div>
+          <div class="opt" data-i="2">
+            <label class="opt-correct"><input type="radio" class="q-correct" name="" value="2" /><span>c)</span></label>
+            <input type="text" class="q-opt" placeholder="Вариант c" />
+          </div>
+          <div class="opt" data-i="3">
+            <label class="opt-correct"><input type="radio" class="q-correct" name="" value="3" /><span>d)</span></label>
+            <input type="text" class="q-opt" placeholder="Вариант d" />
+          </div>
+        </fieldset>
+        <label class="field">
+          <span>Комментарий после ответа (показывается ученику)</span>
+          <textarea class="q-comment" rows="2" placeholder="Пояснение: почему верный вариант верный, что запомнить…"></textarea>
+        </label>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
