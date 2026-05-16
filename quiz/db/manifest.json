@@ -6,6 +6,12 @@
       "title": "Переменные и имена в Python",
       "file": "peremennye-python.json",
       "description": "Квиз по уроку 02: переменные, идентификаторы, присваивание, типы."
+    },
+    {
+      "id": "peremennye-python-v2",
+      "title": "Переменные и имена в Python (вариант 2)",
+      "file": "peremennye-python-v2.json",
+      "description": "Те же темы, что в первом квизе; другой порядок вариантов ответа."
     }
   ]
 }

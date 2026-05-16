@@ -88,20 +88,58 @@ main {
   gap: 0.65rem;
 }
 
-.quiz-list button {
-  width: 100%;
-  text-align: left;
-  font: inherit;
+.quiz-list-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
   padding: 1rem 1.1rem;
   border-radius: var(--radius);
   border: 1px solid var(--border);
   background: var(--surface);
-  color: var(--text);
+}
+
+.quiz-item-info {
+  flex: 1;
+  min-width: 12rem;
   cursor: pointer;
 }
 
-.quiz-list button:hover {
+.quiz-item-info:hover .quiz-item-title {
+  color: var(--accent);
+}
+
+.quiz-item-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quiz-timer-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.quiz-timer-input {
+  width: 4.25rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.quiz-timer-input:focus {
+  outline: none;
   border-color: var(--accent);
+}
+
+.quiz-start-btn {
+  flex-shrink: 0;
 }
 
 .quiz-list .quiz-item-title {
@@ -154,6 +192,69 @@ main {
   border-radius: var(--radius);
   padding: 1.25rem;
   min-height: 10rem;
+}
+
+.play-question-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.play-question-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.play-timer {
+  position: relative;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+}
+
+.play-timer-svg {
+  display: block;
+}
+
+.play-timer-track {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 3;
+}
+
+.play-timer-progress {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke 0.2s ease;
+}
+
+.play-timer--warn .play-timer-progress {
+  stroke: var(--bad);
+}
+
+.play-timer--warn .play-timer-sec {
+  color: var(--bad);
+}
+
+.play-timer-sec {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -52%);
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  pointer-events: none;
+  line-height: 1;
+}
+
+.play-timeout-msg {
+  margin: 0.75rem 0 0;
+  color: #f0a8a8;
+  font-size: 0.95rem;
 }
 
 .play-q-text {
